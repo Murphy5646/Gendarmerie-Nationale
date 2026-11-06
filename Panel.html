@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="robots" content="noindex,nofollow">
+<title>Panel IGGN – Candidatures</title>
+<style>
+:root{--navy:#0f1f3d;--navy2:#1b3157;--red:#b3202a;--green:#1f7a4a;--amber:#b7791f;--paper:#f3f5f8;--ink:#17202e;--mute:#5a6678;--line:#d5dbe5;--white:#fff;
+--serif:Georgia,"Times New Roman",serif;--sans:system-ui,-apple-system,"Segoe UI",Roboto,sans-serif}
+@media(prefers-color-scheme:dark){:root{--paper:#0c1424;--ink:#e8ecf3;--mute:#9aa6bb;--line:#26344f;--white:#142039}}
+*{box-sizing:border-box}
+body{margin:0;font:16px/1.5 var(--sans);color:var(--ink);background:var(--paper)}
+:focus-visible{outline:3px solid var(--red);outline-offset:2px}
+header{background:var(--navy);color:#fff;border-bottom:4px solid var(--red)}
+.bar{max-width:1100px;margin:auto;display:flex;justify-content:space-between;align-items:center;padding:14px 20px;gap:12px;flex-wrap:wrap}
+.bar b{font:700 20px var(--serif)}.bar a{color:#fff;font-size:14px}
+main{max-width:1100px;margin:auto;padding:24px 20px 60px}
+button,input,select,textarea{font:inherit;color:inherit}
+input,select,textarea{padding:10px 12px;border:1px solid var(--line);background:var(--white);border-radius:3px}
+.btn{background:var(--navy2);color:#fff;border:0;padding:10px 16px;border-radius:3px;cursor:pointer;font-weight:600}
+.btn:hover{filter:brightness(1.15)}.btn.ok{background:var(--green)}.btn.no{background:var(--red)}.btn.wait{background:var(--amber)}.btn.ghost{background:transparent;color:inherit;border:1px solid var(--line)}
+#login{max-width:380px;margin:80px auto;background:var(--white);border:1px solid var(--line);border-top:4px solid var(--navy2);padding:28px;display:grid;gap:14px}
+#login h1{font:700 24px var(--serif);margin:0}
+#err{color:var(--red);min-height:1.4em;margin:0;font-size:14px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:12px;margin-bottom:20px}
+.stat{background:var(--white);border:1px solid var(--line);padding:14px 16px;border-left:4px solid var(--navy2)}
+.stat b{display:block;font:700 28px var(--serif)}.stat span{color:var(--mute);font-size:14px}
+.stat.s-attente{border-left-color:var(--amber)}.stat.s-accepte{border-left-color:var(--green)}.stat.s-refuse{border-left-color:var(--red)}
+.tools{display:flex;gap:10px;flex-wrap:wrap;margin-bottom:16px}.tools input{flex:1;min-width:200px}
+.list{display:grid;gap:10px}
+.row{background:var(--white);border:1px solid var(--line);padding:14px 16px;display:grid;grid-template-columns:1fr auto;gap:6px 16px;align-items:center;cursor:pointer;text-align:left;width:100%}
+.row:hover{border-color:var(--navy2)}
+.row strong{font-size:17px}.row small{color:var(--mute)}
+.tag{padding:3px 10px;border-radius:99px;font-size:13px;font-weight:600;color:#fff;justify-self:end}
+.tag.attente{background:var(--amber)}.tag.accepte{background:var(--green)}.tag.refuse{background:var(--red)}
+.empty{padding:40px;text-align:center;color:var(--mute);border:1px dashed var(--line)}
+dialog{border:1px solid var(--line);background:var(--white);color:var(--ink);max-width:680px;width:calc(100% - 24px);padding:0}
+dialog::backdrop{background:rgba(5,10,20,.6)}
+.dh{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--line);border-top:4px solid var(--navy2)}
+.dh h2{font:700 22px var(--serif);margin:0}
+.db{padding:20px;display:grid;gap:14px}
+.db dt{font-size:13px;color:var(--mute);margin-bottom:2px}.db dd{margin:0;white-space:pre-wrap;overflow-wrap:anywhere}
+.db dl{display:grid;gap:12px;margin:0}
+.acts{display:flex;gap:8px;flex-wrap:wrap}
+textarea{width:100%;min-height:90px}
+#mode{font-size:13px;background:var(--amber);color:#fff;padding:8px 20px;text-align:center}
+</style>
+</head>
+<body>
+
+<div id="login">
+  <h1>Panel IGGN</h1>
+  <p style="margin:0;color:var(--mute)">Accès réservé au personnel.</p>
+  <label for="pw" style="font-weight:600">Mot de passe</label>
+  <input id="pw" type="password" autocomplete="current-password">
+  <p id="err" role="alert"></p>
+  <button class="btn" id="enter">Se connecter</button>
+</div>
+
+<div id="app" hidden>
+  <header><div class="bar"><b>IGGN · Candidatures</b><span><a href="Index.html">Voir le site</a> · <a href="#" id="out">Se déconnecter</a></span></div></header>
+  <div id="mode" hidden>Mode démo : seules les candidatures envoyées depuis ce navigateur apparaissent. Renseignez API_URL pour un usage réel.</div>
+  <main>
+    <div class="stats" id="stats"></div>
+    <div class="tools">
+      <input id="q" type="search" placeholder="Rechercher un nom, un Discord, un mot du texte…" aria-label="Rechercher">
+      <select id="flt" aria-label="Filtrer par statut">
+        <option value="">Tous les statuts</option><option value="attente">En attente</option><option value="accepte">Acceptées</option><option value="refuse">Refusées</option>
+      </select>
+      <button class="btn ghost" id="exp">Exporter (JSON)</button>
+      <button class="btn ghost" id="rel">Actualiser</button>
+    </div>
+    <div class="list" id="list"></div>
+  </main>
+</div>
+
+<dialog id="dlg"><div class="dh"><h2 id="dt"></h2><button class="btn ghost" id="close" aria-label="Fermer">Fermer</button></div><div class="db" id="dbody"></div></dialog>
+
+<script>
+/* ===== CONFIGURATION (identique dans Index.html) ===== */
+const CONFIG = {
+  API_URL: "",
+  STORE_KEY: "iggn_candidatures",
+  /* Empreinte SHA-256 du mot de passe. Par défaut : « iggn2026 ». Pour changer :
+     dans la console du navigateur, exécutez
+     crypto.subtle.digest("SHA-256",new TextEncoder().encode("VOTRE_MDP")).then(b=>console.log([...new Uint8Array(b)].map(x=>x.toString(16).padStart(2,"0")).join("")))
+     ATTENTION : ce contrôle est côté navigateur, il ne protège PAS les données. En production, l’API doit vérifier une clé secrète. */
+  PW_HASH: "5fa6f3c12156028e888f8744517acf9141ba61d4631e1968bdce9dd58ba2bf20"
+};
+const LABEL = { attente: "En attente", accepte: "Acceptée", refuse: "Refusée" };
+const $ = id => document.getElementById(id);
+const esc = s => String(s ?? "").replace(/[&<>"']/g, c => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" }[c]));
+let DATA = [], KEY = sessionStorage.getItem("iggn_key") || "";
+
+const sha = async t => [...new Uint8Array(await crypto.subtle.digest("SHA-256", new TextEncoder().encode(t)))].map(x => x.toString(16).padStart(2, "0")).join("");
+
+async function login() {
+  const p = $("pw").value;
+  const ok = (await sha(p)) === CONFIG.PW_HASH;
+  if (!ok) { $("err").textContent = "Mot de passe incorrect."; return; }
+  KEY = p; sessionStorage.setItem("iggn_key", p); start();
+}
+function start() {
+  $("login").hidden = true; $("app").hidden = false; $("mode").hidden = !!CONFIG.API_URL; load();
+}
+async function load() {
+  try {
+    if (CONFIG.API_URL) {
+      const r = await fetch(CONFIG.API_URL + "?action=list&key=" + encodeURIComponent(KEY));
+      if (!r.ok) throw 0; DATA = await r.json();
+    } else DATA = JSON.parse(localStorage.getItem(CONFIG.STORE_KEY) || "[]");
+  } catch (_) { DATA = []; $("list").innerHTML = '<div class="empty">Impossible de charger les candidatures. Vérifiez API_URL et votre connexion.</div>'; return; }
+  render();
+}
+async function save(c) {
+  if (CONFIG.API_URL) {
+    await fetch(CONFIG.API_URL, { method: "POST", headers: { "Content-Type": "text/plain" }, body: JSON.stringify({ action: "update", key: KEY, data: c }) });
+  } else localStorage.setItem(CONFIG.STORE_KEY, JSON.stringify(DATA));
+}
+function render() {
+  const n = s => DATA.filter(c => c.statut === s).length;
+  $("stats").innerHTML = [["", DATA.length, "Total"], ["attente", n("attente"), "En attente"], ["accepte", n("accepte"), "Acceptées"], ["refuse", n("refuse"), "Refusées"]]
+    .map(([k, v, l]) => `<div class="stat s-${k}"><b>${v}</b><span>${l}</span></div>`).join("");
+  const q = $("q").value.toLowerCase(), f = $("flt").value;
+  const rows = DATA.filter(c => (!f || c.statut === f) && (!q || JSON.stringify(c).toLowerCase().includes(q)))
+    .sort((a, b) => b.date.localeCompare(a.date));
+  $("list").innerHTML = rows.length ? rows.map(c => `<button class="row" data-id="${esc(c.id)}">
+      <strong>${esc(c.nomRP)}</strong><span class="tag ${esc(c.statut)}">${LABEL[c.statut] || "?"}</span>
+      <small>${esc(c.discord)} · ${esc(c.grade)} · ${new Date(c.date).toLocaleDateString("fr-FR")}</small><span></span></button>`).join("")
+    : '<div class="empty">Aucune candidature ne correspond. Elles apparaîtront ici dès qu’elles seront envoyées depuis le site.</div>';
+}
+function open(id) {
+  const c = DATA.find(x => x.id === id); if (!c) return;
+  $("dt").textContent = c.nomRP;
+  const F = [["Discord", c.discord], ["Âge", c.age], ["Grade / expérience", c.grade], ["Disponibilités", c.dispo], ["Motivation", c.motivation], ["Expérience RP", c.experience || "—"], ["Reçue le", new Date(c.date).toLocaleString("fr-FR")]];
+  $("dbody").innerHTML = `<dl>${F.map(([k, v]) => `<div><dt>${k}</dt><dd>${esc(v)}</dd></div>`).join("")}</dl>
+    <div><label for="note" style="font-size:13px;color:var(--mute)">Note interne (visible du personnel uniquement)</label><textarea id="note">${esc(c.note)}</textarea></div>
+    <div class="acts"><button class="btn ok" data-s="accepte">Accepter</button><button class="btn wait" data-s="attente">Remettre en attente</button><button class="btn no" data-s="refuse">Refuser</button>
+    <button class="btn ghost" data-s="note">Enregistrer la note</button><button class="btn ghost" data-s="del" style="margin-left:auto">Supprimer</button></div>`;
+  $("dbody").onclick = async e => {
+    const s = e.target.dataset.s; if (!s) return;
+    if (s === "del") { if (!confirm("Supprimer définitivement cette candidature ?")) return; DATA = DATA.filter(x => x.id !== id); if (CONFIG.API_URL) await fetch(CONFIG.API_URL, { method: "POST", headers: { "Content-Type": "text/plain" }, body: JSON.stringify({ action: "delete", key: KEY, id }) }); else await save(); }
+    else { c.note = $("note").value; if (s !== "note") c.statut = s; await save(c); }
+    $("dlg").close(); render();
+  };
+  $("dlg").showModal();
+}
+$("enter").onclick = login; $("pw").onkeydown = e => e.key === "Enter" && login();
+$("out").onclick = e => { e.preventDefault(); sessionStorage.removeItem("iggn_key"); location.reload(); };
+$("list").onclick = e => { const b = e.target.closest(".row"); if (b) open(b.dataset.id); };
+$("q").oninput = $("flt").onchange = render; $("rel").onclick = load; $("close").onclick = () => $("dlg").close();
+$("exp").onclick = () => { const a = document.createElement("a"); a.href = URL.createObjectURL(new Blob([JSON.stringify(DATA, null, 2)], { type: "application/json" })); a.download = "candidatures-iggn.json"; a.click(); };
+if (KEY) start();
+</script>
+</body>
+</html>
