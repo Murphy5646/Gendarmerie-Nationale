@@ -1,173 +1,962 @@
+
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
-<title>Inspection Général de la Gendarmerie Nationale - BellerRoche</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<title>IGGN — Délégation territoriale de BelleRoche</title>
+
+<meta name="description" content="Portail institutionnel de l'Inspection générale de la Gendarmerie nationale de BelleRoche — Univers RP.">
 
 <style>
-body{
-font-family: Cambria Math, sans-serif;
-margin:0;
-background:#004790;
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:wght@400;700&family=Roboto:wght@300;400;500;700&display=swap');
+
+:root {
+    --navy: #081a35;
+    --blue: #102e58;
+    --blue-light: #183f70;
+    --gold: #c6a66b;
+    --white: #ffffff;
+    --background: #f1f3f6;
+    --text: #253449;
+    --muted: #718096;
+    --border: #dce2e9;
 }
 
-header{
-background:#0a2a66;
-color:white;
-padding:20px;
-text-align:center;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-nav{
-background:#142f86;
-padding:10px;
-text-align:center;
+html {
+    scroll-behavior: smooth;
 }
 
-nav a{
-color:white;
-margin:10px;
-text-decoration:none;
-font-weight:bold;
+body {
+    font-family: 'Roboto', sans-serif;
+    background: var(--background);
+    color: var(--text);
+    line-height: 1.7;
 }
 
-section{
-padding:40px;
-background:white;
-margin:20px;
-border-radius:10px;
+/* BANDEAU SUPERIEUR */
+
+.topbar {
+    background: #06152b;
+    color: #cbd4df;
+    padding: 8px 7%;
+    font-size: 11px;
+    letter-spacing: 1.4px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
-footer{
-background:#0a2a66;
-color:white;
-text-align:center;
-padding:15px;
-margin-top:20px;
+.topbar span {
+    text-transform: uppercase;
 }
 
-h1,h2{
-color:#0a2a66;
+/* EN-TETE */
+
+header {
+    background: var(--navy);
+    color: white;
+    padding: 32px 7%;
+    display: flex;
+    align-items: center;
+    gap: 25px;
+    border-bottom: 3px solid var(--gold);
 }
 
-.grade{
-background:#f0f3ff;
-padding:10px;
-margin:5px;
-border-radius:5px;
+.emblem {
+    width: 76px;
+    height: 76px;
+    flex-shrink: 0;
+    border: 2px solid var(--gold);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    font-size: 28px;
+    font-weight: bold;
+    font-family: 'Libre Baskerville', serif;
+}
+
+.header-text small {
+    color: var(--gold);
+    text-transform: uppercase;
+    font-size: 10px;
+    letter-spacing: 3px;
+}
+
+.header-text h1 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 24px;
+    font-weight: 400;
+    margin: 5px 0;
+}
+
+.header-text p {
+    color: #aebdce;
+    font-size: 13px;
+}
+
+/* NAVIGATION */
+
+nav {
+    background: var(--blue);
+    padding: 0 7%;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    min-height: 54px;
+    border-bottom: 1px solid #29476d;
+}
+
+nav a {
+    color: #e3eaf2;
+    text-decoration: none;
+    font-size: 12px;
+    font-weight: 500;
+    letter-spacing: .6px;
+    padding: 19px 16px;
+    transition: .2s;
+}
+
+nav a:hover {
+    background: var(--blue-light);
+    color: var(--gold);
+}
+
+/* BANNIERE */
+
+.hero {
+    background:
+        linear-gradient(90deg, rgba(5,20,42,.97), rgba(8,29,57,.80)),
+        linear-gradient(135deg, #142f53, #07172e);
+    color: white;
+    padding: 85px 8%;
+    border-bottom: 4px solid var(--gold);
+}
+
+.hero-content {
+    max-width: 850px;
+}
+
+.overline {
+    color: var(--gold);
+    font-size: 11px;
+    letter-spacing: 3px;
+    text-transform: uppercase;
+    margin-bottom: 18px;
+}
+
+.hero h2 {
+    font-family: 'Libre Baskerville', serif;
+    font-size: 37px;
+    line-height: 1.4;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+.hero p {
+    color: #c5d0dd;
+    font-weight: 300;
+    max-width: 650px;
+    font-size: 15px;
+}
+
+.hero-button {
+    display: inline-block;
+    margin-top: 30px;
+    background: var(--gold);
+    color: #101c2c;
+    padding: 13px 24px;
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: .2s;
+}
+
+.hero-button:hover {
+    background: #dfc28b;
+}
+
+/* INFORMATIONS */
+
+.info-strip {
+    background: white;
+    padding: 16px 7%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 12px;
+    border-bottom: 1px solid var(--border);
+}
+
+.info-item {
+    font-size: 11px;
+    color: var(--muted);
+    text-transform: uppercase;
+    letter-spacing: .8px;
+}
+
+.info-item strong {
+    color: var(--blue);
+    margin-left: 5px;
+}
+
+/* CONTENU */
+
+main {
+    max-width: 1180px;
+    margin: 45px auto;
+    padding: 0 25px;
+}
+
+section {
+    background: white;
+    margin-bottom: 25px;
+    padding: 36px;
+    border: 1px solid var(--border);
+    box-shadow: 0 4px 14px rgba(15, 34, 59, .035);
+    scroll-margin-top: 25px;
+}
+
+.section-label {
+    font-size: 10px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: #a58a58;
+    font-weight: 700;
+    margin-bottom: 7px;
+}
+
+section h2 {
+    color: var(--navy);
+    font-family: 'Libre Baskerville', serif;
+    font-size: 23px;
+    font-weight: 400;
+    margin-bottom: 20px;
+}
+
+section h3 {
+    color: var(--blue);
+    font-size: 15px;
+    margin: 26px 0 12px;
+}
+
+section p {
+    color: #536174;
+    font-size: 14px;
+    margin-bottom: 15px;
+}
+
+/* CARTES */
+
+.cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 15px;
+    margin-top: 22px;
+}
+
+.card {
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--gold);
+    padding: 20px;
+    background: #fbfcfd;
+}
+
+.card h3 {
+    margin: 0 0 10px;
+    font-size: 14px;
+}
+
+.card p {
+    font-size: 12px;
+    margin: 0;
+}
+
+/* LISTES */
+
+ul {
+    margin: 15px 0 15px 20px;
+    color: #536174;
+    font-size: 14px;
+}
+
+li {
+    padding: 5px 0;
+}
+
+/* ORGANISATION */
+
+.organization {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    margin-top: 18px;
+}
+
+.grade {
+    background: #f5f7fa;
+    border: 1px solid var(--border);
+    padding: 15px 18px;
+    border-left: 3px solid var(--blue);
+}
+
+.grade strong {
+    display: block;
+    color: var(--blue);
+    font-size: 13px;
+    margin-bottom: 4px;
+}
+
+.grade span {
+    color: var(--muted);
+    font-size: 11px;
+}
+
+/* DOSSIERS */
+
+.dossier {
+    border: 1px solid var(--border);
+    margin-top: 14px;
+    background: #fbfcfd;
+}
+
+.dossier-header {
+    padding: 16px 20px;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.dossier-header strong {
+    color: var(--blue);
+    font-size: 13px;
+}
+
+.dossier-header span {
+    color: #947848;
+    font-size: 10px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.dossier p {
+    padding: 0 20px 17px;
+    font-size: 12px;
+    margin: 0;
+}
+
+/* PROCEDURE */
+
+.procedure {
+    border-left: 2px solid var(--gold);
+    padding: 4px 0 4px 20px;
+    margin: 18px 0;
+}
+
+.procedure strong {
+    color: var(--blue);
+    font-size: 13px;
+}
+
+.procedure p {
+    font-size: 12px;
+    margin: 3px 0 0;
+}
+
+/* LIENS */
+
+.document-link {
+    display: inline-block;
+    padding: 12px 17px;
+    background: var(--blue);
+    color: white;
+    text-decoration: none;
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: .8px;
+    margin-top: 10px;
+}
+
+.document-link:hover {
+    background: var(--blue-light);
+}
+
+/* AVERTISSEMENT */
+
+.notice {
+    background: #f6f2e9;
+    border-left: 4px solid var(--gold);
+    padding: 17px 20px;
+    margin-top: 20px;
+    color: #645638;
+    font-size: 12px;
+}
+
+/* PIED DE PAGE */
+
+footer {
+    background: #06152b;
+    color: #aebdce;
+    padding: 40px 7% 25px;
+    border-top: 3px solid var(--gold);
+}
+
+.footer-main {
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 30px;
+    margin-bottom: 30px;
+}
+
+footer h3 {
+    color: white;
+    font-family: 'Libre Baskerville', serif;
+    font-weight: 400;
+    margin-bottom: 10px;
+}
+
+footer p {
+    font-size: 11px;
+    margin-bottom: 6px;
+}
+
+footer a {
+    color: var(--gold);
+    text-decoration: none;
+}
+
+.footer-bottom {
+    border-top: 1px solid #253954;
+    padding-top: 18px;
+    text-align: center;
+    font-size: 10px;
+    letter-spacing: .8px;
+}
+
+/* RESPONSIVE */
+
+@media (max-width: 700px) {
+    .topbar {
+        padding: 10px 5%;
+        font-size: 9px;
+    }
+
+    header {
+        padding: 25px 5%;
+        gap: 15px;
+    }
+
+    .emblem {
+        width: 58px;
+        height: 58px;
+        font-size: 20px;
+    }
+
+    .header-text h1 {
+        font-size: 17px;
+    }
+
+    .header-text p {
+        font-size: 11px;
+    }
+
+    nav {
+        padding: 5px;
+    }
+
+    nav a {
+        padding: 12px 10px;
+        font-size: 10px;
+    }
+
+    .hero {
+        padding: 55px 7%;
+    }
+
+    .hero h2 {
+        font-size: 27px;
+    }
+
+    main {
+        margin: 25px auto;
+        padding: 0 12px;
+    }
+
+    section {
+        padding: 23px 18px;
+    }
+
+    .cards,
+    .organization {
+        grid-template-columns: 1fr;
+    }
+
+    .info-strip {
+        padding: 15px 6%;
+    }
 }
 </style>
 </head>
 
 <body>
 
+<div class="topbar">
+    <span>République française — Univers RP</span>
+    <span>Délégation territoriale de BelleRoche</span>
+</div>
+
 <header>
-<h1>Inspection Général de la Gendarmerie Nationale</h1>
-<p>Ville de BelleRoche</p>
+    <div class="emblem">IG</div>
+
+    <div class="header-text">
+        <small>Gendarmerie nationale — Simulation RP</small>
+        <h1>Inspection générale</h1>
+        <p>Délégation territoriale de BelleRoche</p>
+    </div>
 </header>
 
 <nav>
-<a href="#accueil">Accueil</a>
-<a href="#missions">Missions</a>
-<a href="#hierarchie">Hiérarchie</a>
-<a href="https://www.legifrance.gouv.fr/codes/section_lc/LEGITEXT000006070719/LEGISCTA000006117596/2026-03-07" target="_blank">Code pénal</a>
-<a href="#contact">Contact</a>
+    <a href="#accueil">PRÉSENTATION</a>
+    <a href="#missions">MISSIONS</a>
+    <a href="#organisation">ORGANISATION</a>
+    <a href="#dossiers">INSPECTIONS</a>
+    <a href="#deontologie">DÉONTOLOGIE</a>
+    <a href="#contact">CONTACT</a>
 </nav>
 
-<section id="accueil">
-<h2>Bienvenue</h2>
-<p>
-L'inspection Général de la Gendarmerie Nationale de BelleRoche assure la sécurité des citoyens,
-la protection des biens et le maintien de l'ordre public.
-</p>
+<div class="hero">
+    <div class="hero-content">
+        <div class="overline">Inspection générale de la Gendarmerie nationale</div>
 
-<p>
-Nos gendarmes interviennent 24h/24 pour protéger la population et appliquer
-les lois de la République française.
-</p>
+        <h2>Contrôler l'institution.<br>Garantir son intégrité.</h2>
+
+        <p>
+            La délégation territoriale de BelleRoche veille au respect
+            des obligations professionnelles, à la probité des personnels
+            et au bon fonctionnement des services de la Gendarmerie
+            dans le cadre de notre univers de jeu de rôle.
+        </p>
+
+        <a href="#missions" class="hero-button">
+            Découvrir nos attributions
+        </a>
+    </div>
+</div>
+
+<div class="info-strip">
+    <div class="info-item">Institution <strong>Inspection générale</strong></div>
+    <div class="info-item">Implantation <strong>BelleRoche</strong></div>
+    <div class="info-item">Compétence <strong>Contrôle et déontologie</strong></div>
+    <div class="info-item">Statut <strong>Simulation RP</strong></div>
+</div>
+
+<main>
+
+<!-- PRESENTATION -->
+
+<section id="accueil">
+    <div class="section-label">01 — Présentation institutionnelle</div>
+    <h2>Présentation de la délégation</h2>
+
+    <p>
+        L'Inspection générale de la Gendarmerie nationale constitue,
+        dans notre univers RP, une autorité chargée de veiller à
+        l'intégrité institutionnelle et au respect des principes
+        fondamentaux encadrant l'action des personnels.
+    </p>
+
+    <p>
+        Implantée sur le territoire de BelleRoche, la délégation exerce
+        ses missions dans un cadre indépendant des unités opérationnelles.
+        Elle intervient notamment dans le suivi des signalements,
+        l'examen des manquements professionnels et l'évaluation
+        du fonctionnement des services.
+    </p>
+
+    <p>
+        Son action repose sur trois principes fondamentaux :
+        impartialité, confidentialité et responsabilité.
+    </p>
+
+    <div class="notice">
+        <strong>Principe institutionnel :</strong>
+        aucune fonction, aucun grade et aucune ancienneté ne dispensent
+        un personnel du respect de ses obligations professionnelles.
+    </div>
 </section>
+
+<!-- MISSIONS -->
 
 <section id="missions">
-<h2>Nos Missions</h2>
+    <div class="section-label">02 — Attributions</div>
+    <h2>Nos domaines de compétence</h2>
 
-<ul>
-<li>Sécurité publique</li>
-<li>Police judiciaire</li>
-<li>Maintien de l’ordre</li>
-<li>Assistance aux personnes</li>
-<li>Application du Code pénal français</li>
-</ul>
+    <p>
+        La délégation territoriale conduit différentes missions
+        de contrôle administratif et déontologique.
+    </p>
 
+    <div class="cards">
+
+        <div class="card">
+            <h3>Contrôle interne</h3>
+            <p>
+                Examen du fonctionnement des unités, vérification
+                des pratiques administratives et suivi des obligations
+                institutionnelles.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Enquêtes administratives</h3>
+            <p>
+                Examen des situations individuelles et collectives
+                lorsqu'un manquement professionnel est signalé.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Déontologie</h3>
+            <p>
+                Veille au respect des règles professionnelles,
+                de l'impartialité, de la dignité et de la probité.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Audits et inspections</h3>
+            <p>
+                Évaluation administrative des services et formulation
+                de recommandations visant à améliorer leur fonctionnement.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Traitement des signalements</h3>
+            <p>
+                Réception, analyse et orientation des signalements
+                transmis à l'autorité compétente.
+            </p>
+        </div>
+
+        <div class="card">
+            <h3>Suivi institutionnel</h3>
+            <p>
+                Conservation des comptes rendus, suivi des procédures
+                et transmission des conclusions aux autorités concernées.
+            </p>
+        </div>
+
+    </div>
 </section>
 
-<section id="hierarchie">
+<!-- ORGANISATION -->
 
-<h2>Hiérarchie de la Gendarmerie</h2>
+<section id="organisation">
+    <div class="section-label">03 — Administration interne</div>
+    <h2>Organisation de la délégation</h2>
 
-<h3>La Haute Direction</h3>
-<div class="grade">Magistrat</div>
-<div class="grade">Chef de l'IGGN</div>
-<div class="grade">chef d'inspection généraux chargés de missions</div>
+    <p>
+        L'organisation interne est structurée autour d'une direction,
+        de responsables de division et de personnels chargés
+        des missions d'inspection.
+    </p>
 
-<h3>Officiers supérieurs</h3>
-<div class="grade">Colonel</div>
-<div class="grade">Lieutenant-Colonel</div>
-<div class="grade">Commandant</div>
+    <h3>Direction de la délégation</h3>
 
-<h3>Officiers</h3>
-<div class="grade">Capitaine</div>
-<div class="grade">Lieutenant</div>
-<div class="grade">Sous-Lieutenant</div>
+    <div class="organization">
+        <div class="grade">
+            <strong>Directeur de la délégation</strong>
+            <span>Autorité dirigeante de la structure RP</span>
+        </div>
 
-<h3>Officiers subalternes</h3>
-<div class="grade">Capitaines</div>
-<div class="grade">Lieutenants</div>
+        <div class="grade">
+            <strong>Directeur adjoint</strong>
+            <span>Assistance et coordination de la direction</span>
+        </div>
+    </div>
 
-<h3>Sous-officiers supérieurs</h3>
-<div class="grade">Major</div>
-<div class="grade">Adjudants-chefs</div>
-<div class="grade">Adjudants</div>
+    <h3>Encadrement supérieur</h3>
 
-<h3>Sous-Officiers Subalternes</h3>
-<div class="grade">Maréchal des logis-chef</div>
-<div class="grade">Gendarme</div>
-<div class="grade">Élève-gendarme</div>
+    <div class="organization">
+        <div class="grade">
+            <strong>Chef de division</strong>
+            <span>Responsabilité d'un domaine d'inspection</span>
+        </div>
 
+        <div class="grade">
+            <strong>Adjoint de division</strong>
+            <span>Assistance et suivi des dossiers</span>
+        </div>
+    </div>
 
-<section id="codepenal">
+    <h3>Personnel d'inspection</h3>
 
-<h2>Code pénal</h2>
+    <div class="organization">
+        <div class="grade">
+            <strong>Officier enquêteur</strong>
+            <span>Conduite des dossiers administratifs RP</span>
+        </div>
 
-<p>
-Les infractions constatées par l'inspection Général de la Gendarmerie Nationale de BelleRoche sont traitées selon le Code pénal français.
-</p>
+        <div class="grade">
+            <strong>Enquêteur</strong>
+            <span>Collecte et analyse des éléments transmis</span>
+        </div>
 
-<ul> 
-  https://www.legifrance.gouv.fr/codes/texte_lc/LEGITEXT000006070719/
-</ul>
+        <div class="grade">
+            <strong>Assistant d'inspection</strong>
+            <span>Appui administratif et documentaire</span>
+        </div>
 
+        <div class="grade">
+            <strong>Personnel stagiaire</strong>
+            <span>Formation et découverte des procédures</span>
+        </div>
+    </div>
+
+    <div class="notice">
+        Cette organisation décrit les fonctions propres à la structure
+        fictive de BelleRoche. Les fonctions d'inspection ne constituent
+        pas des grades militaires de la Gendarmerie nationale.
+    </div>
 </section>
+
+<!-- DOSSIERS -->
+
+<section id="dossiers">
+    <div class="section-label">04 — Activité administrative</div>
+    <h2>Suivi des inspections et dossiers</h2>
+
+    <p>
+        Les dossiers transmis à la délégation font l'objet d'un suivi
+        administratif. Leur traitement doit respecter les principes
+        de confidentialité et d'impartialité.
+    </p>
+
+    <div class="dossier">
+        <div class="dossier-header">
+            <strong>Examen des pratiques professionnelles</strong>
+            <span>Type : Inspection</span>
+        </div>
+        <p>
+            Vérification du respect des obligations professionnelles
+            dans le cadre des activités des unités.
+        </p>
+    </div>
+
+    <div class="dossier">
+        <div class="dossier-header">
+            <strong>Signalement déontologique</strong>
+            <span>Type : Signalement</span>
+        </div>
+        <p>
+            Étude des éléments communiqués à la délégation et orientation
+            vers l'autorité compétente.
+        </p>
+    </div>
+
+    <div class="dossier">
+        <div class="dossier-header">
+            <strong>Évaluation administrative d'une unité</strong>
+            <span>Type : Audit</span>
+        </div>
+        <p>
+            Analyse du fonctionnement administratif et établissement
+            d'observations destinées à la hiérarchie.
+        </p>
+    </div>
+</section>
+
+<!-- PROCEDURE -->
+
+<section>
+    <div class="section-label">05 — Cadre procédural</div>
+    <h2>Traitement d'un dossier</h2>
+
+    <p>
+        Chaque dossier suit une procédure interne destinée à garantir
+        la régularité de son traitement.
+    </p>
+
+    <div class="procedure">
+        <strong>01 — Réception</strong>
+        <p>
+            Enregistrement de la demande ou du signalement transmis
+            à la délégation.
+        </p>
+    </div>
+
+    <div class="procedure">
+        <strong>02 — Examen préliminaire</strong>
+        <p>
+            Vérification de la nature des faits signalés et de la
+            compétence de la délégation.
+        </p>
+    </div>
+
+    <div class="procedure">
+        <strong>03 — Instruction administrative</strong>
+        <p>
+            Analyse des éléments disponibles et établissement
+            d'un compte rendu.
+        </p>
+    </div>
+
+    <div class="procedure">
+        <strong>04 — Conclusions</strong>
+        <p>
+            Rédaction des observations et transmission à l'autorité
+            compétente selon le cadre RP.
+        </p>
+    </div>
+
+    <div class="procedure">
+        <strong>05 — Archivage</strong>
+        <p>
+            Classement du dossier et conservation de son historique
+            administratif dans le cadre du serveur.
+        </p>
+    </div>
+</section>
+
+<!-- DEONTOLOGIE -->
+
+<section id="deontologie">
+    <div class="section-label">06 — Principes fondamentaux</div>
+    <h2>Déontologie et obligations professionnelles</h2>
+
+    <p>
+        Tout personnel intervenant au sein de notre univers RP est
+        tenu de respecter les principes suivants :
+    </p>
+
+    <ul>
+        <li>Respect de la dignité de chaque personne.</li>
+        <li>Impartialité dans le traitement des situations.</li>
+        <li>Respect de la confidentialité des dossiers.</li>
+        <li>Refus de tout abus lié à une fonction ou à un grade.</li>
+        <li>Respect des règles institutionnelles et hiérarchiques.</li>
+        <li>Obligation de rendre compte des missions confiées.</li>
+        <li>Préservation de l'intégrité et de la crédibilité institutionnelle.</li>
+    </ul>
+
+    <h3>Références documentaires</h3>
+
+    <p>
+        Pour la documentation juridique française, vous pouvez consulter
+        le Code pénal et les textes applicables sur le site officiel
+        de Légifrance.
+    </p>
+
+    <a class="document-link"
+       href="https://www.legifrance.gouv.fr/codes/texte_lc/LEGITEXT000006070719/"
+       target="_blank"
+       rel="noopener noreferrer">
+        Consulter le Code pénal
+    </a>
+
+    <a class="document-link"
+       href="https://www.gendarmerie.interieur.gouv.fr/"
+       target="_blank"
+       rel="noopener noreferrer">
+        Site officiel de la Gendarmerie
+    </a>
+</section>
+
+<!-- CONTACT -->
 
 <section id="contact">
+    <div class="section-label">07 — Relations institutionnelles</div>
+    <h2>Contacter la délégation</h2>
 
-<h2>Contact</h2>
+    <p>
+        Pour toute question relative au fonctionnement de la délégation,
+        aux recrutements RP ou à la transmission d'un dossier,
+        veuillez utiliser les coordonnées prévues par notre communauté.
+    </p>
 
-<p>
-Brigade territoriale de BelleRoche
-</p>
+    <div class="cards">
 
-<p>
-📍 Avenue de la République  
-📞 17 - Urgences Gendarmerie  
-📢 Discord : <a href="https://discord.gg/YUCfjGYu">Rejoindre le serveur</a>
-</p>
+        <div class="card">
+            <h3>Implantation</h3>
+            <p>
+                Délégation territoriale de BelleRoche<br>
+                Avenue de la République<br>
+                BelleRoche
+            </p>
+        </div>
 
+        <div class="card">
+            <h3>Communication</h3>
+            <p>
+                Serveur communautaire et espace de communication
+                dédiés à l'univers RP.
+            </p>
+            <a class="document-link"
+               href="https://discord.gg/YUCfjGYu"
+               target="_blank"
+               rel="noopener noreferrer">
+                Accéder au serveur
+            </a>
+        </div>
+
+    </div>
+
+    <div class="notice">
+        <strong>Information :</strong>
+        ce portail et les coordonnées présentées concernent exclusivement
+        un projet de jeu de rôle. Ils ne permettent pas de contacter
+        les services réels de la Gendarmerie nationale.
+    </div>
 </section>
 
+</main>
+
 <footer>
-<p>© 2026 Inspection Général de la Gendarmerie Nationale - BelleRoche</p>
+    <div class="footer-main">
+
+        <div>
+            <h3>Inspection générale</h3>
+            <p>Délégation territoriale de BelleRoche</p>
+            <p>Gendarmerie nationale — Univers RP</p>
+        </div>
+
+        <div>
+            <h3>Navigation</h3>
+            <p><a href="#accueil">Présentation</a></p>
+            <p><a href="#missions">Missions</a></p>
+            <p><a href="#organisation">Organisation</a></p>
+            <p><a href="#contact">Contact</a></p>
+        </div>
+
+        <div>
+            <h3>Références</h3>
+            <p><a href="https://www.legifrance.gouv.fr/"
+                  target="_blank" rel="noopener noreferrer">Légifrance</a></p>
+            <p><a href="https://www.gendarmerie.interieur.gouv.fr/"
+                  target="_blank" rel="noopener noreferrer">Gendarmerie nationale</a></p>
+        </div>
+
+    </div>
+
+    <div class="footer-bottom">
+        © 2026 — INSPECTION GÉNÉRALE — DÉLÉGATION DE BELLEROCHE<br>
+        SITE DE SIMULATION ROLEPLAY — AUCUN LIEN OFFICIEL AVEC L'ÉTAT
+    </div>
 </footer>
 
 </body>
-
 </html>
